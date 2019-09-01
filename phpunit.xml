@@ -1,4 +1,6 @@
-<phpunit>
+<phpunit bootstrap="./vendor/autoload.php"
+         convertNoticesToExceptions="false"
+         convertWarningsToExceptions="false">
     <testsuites>
         <testsuite name="framework">
             <directory>tests</directory>
