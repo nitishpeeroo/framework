@@ -1,8 +1,6 @@
 <?php
 
-
     namespace Framework;
-
 
     use Framework\Router\Route;
     use Psr\Http\Message\ServerRequestInterface;
@@ -21,6 +19,9 @@ class Router
      */
     private $router;
 
+    /**
+     * Router constructor.
+     */
     public function __construct()
     {
         $this->router = new FastRouteRouter();
@@ -56,6 +57,12 @@ class Router
         return null;
     }
 
+    /**
+     * @param string $name
+     * @param array  $params
+     *
+     * @return string|null
+     */
     public function generateUri(string $name, array $params): ?string
     {
         return  $this->router->generateUri($name, $params);

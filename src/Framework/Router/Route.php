@@ -22,6 +22,13 @@ class Route
      */
     private $parameters;
 
+    /**
+     * Route constructor.
+     *
+     * @param string   $name
+     * @param callable $callback
+     * @param array    $parameters
+     */
     public function __construct(string $name, callable $callback, array $parameters)
     {
         $this->name = $name;

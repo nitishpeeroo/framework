@@ -6,6 +6,10 @@
     use Psr\Http\Message\ResponseInterface;
     use Psr\Http\Message\ServerRequestInterface;
 
+    /**
+     * Class App
+     * @package Framework
+     */
 class App
 {
     /**
@@ -22,14 +26,23 @@ class App
      *
      * @param string[] $modules Liste des modules à charger
      */
-    public function __construct(array $modules = [])
+    public function __construct(array $modules = [], array $dependencies = [])
     {
         $this->router = new Router();
+        if (array_key_exists('renderer', $dependencies)) {
+            $dependencies['renderer']->addGlobal('router', $this->router);
+        }
         foreach ($modules as $module) {
-            $this->modules = new $module($this->router);
+            $this->modules = new $module($this->router, $dependencies['renderer']);
         }
     }
 
+    /**
+     * @param ServerRequestInterface $request
+     *
+     * @return ResponseInterface
+     * @throws \Exception
+     */
     public function run(ServerRequestInterface $request): ResponseInterface
     {
         $uri = $request->getUri()->getPath();

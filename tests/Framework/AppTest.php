@@ -29,7 +29,7 @@
             ]);
             $request = new ServerRequest('GET', '/blog');
             $response = $app->run($request);
-            $this->assertContains('<h1> Bienvenue sur le blog </h1>', (string)$response->getBody());
+            $this->assertContains('<h1>Bienvenue sur le blog</h1>', (string)$response->getBody());
             $this->assertEquals(200, $response->getStatusCode());
 
             $requestSingle = new ServerRequest('GET', '/blog/article-de-test');
