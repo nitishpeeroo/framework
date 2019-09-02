@@ -4,7 +4,7 @@
     use Framework\PHPRenderer;
     use PHPUnit\Framework\TestCase;
 
-    class RendererTest extends TestCase {
+    class PHPRendererTest extends TestCase {
 
         /**
          * @var PHPRenderer
@@ -13,8 +13,8 @@
 
         public function setUp()
         {
-            $this->renderer = new PHPRenderer();
-            $this->renderer->addPath( __DIR__.'/views');
+            $this->renderer = new  \Framework\Renderer\PHPRenderer( __DIR__.'/views');
+
         }
 
         public function testRenderTheRightPath(){

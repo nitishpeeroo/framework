@@ -2,7 +2,7 @@
 
     use App\Blog\BlogModule;
     use Framework\App;
-    use Framework\Renderer;
+    use Framework\Renderer\TwigRenderer;
     use GuzzleHttp\Psr7\ServerRequest;
     use function Http\Response\send;
 
@@ -12,8 +12,8 @@
     $whoops->prependHandler(new \Whoops\Handler\PrettyPageHandler());
     $whoops->register();
 
-    $renderer = new Renderer();
-    $renderer->addPath(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'views');
+    $renderer = new TwigRenderer(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'views');
+
     $app = new App([
         BlogModule::class
     ], [
