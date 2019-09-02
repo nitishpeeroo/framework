@@ -1,8 +1,9 @@
 <?php
 
     use App\Blog\BlogModule;
+    use DI\ContainerBuilder;
     use Framework\App;
-    use Framework\Renderer\TwigRenderer;
+    use Framework\Renderer\RendererInterface;
     use GuzzleHttp\Psr7\ServerRequest;
     use function Http\Response\send;
 
@@ -12,13 +13,24 @@
     $whoops->prependHandler(new \Whoops\Handler\PrettyPageHandler());
     $whoops->register();
 
-    $renderer = new TwigRenderer(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'views');
-
-    $app = new App([
+    $modules  = [
         BlogModule::class
-    ], [
-        'renderer' => $renderer
-    ]);
+    ];
+
+    $builder = new ContainerBuilder();
+    $builder->addDefinitions(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.php');
+
+    foreach ($modules as $module) {
+        if ($module::DEFINITIONS) {
+            $builder->addDefinitions($module::DEFINITIONS);
+        }
+    }
+    $builder->addDefinitions(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'config.php');
+
+    $container =  $builder->build();
+
+    $app = new App($container, $modules);
+
 
     $response = $app->run(ServerRequest::fromGlobals());
     send($response);
