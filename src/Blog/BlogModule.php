@@ -13,7 +13,11 @@
 class BlogModule extends Module
 {
 
-    const DEFINITIONS = __DIR__ . DIRECTORY_SEPARATOR . 'config.php';
+    const DEFINITIONS = __DIR__ . DS . 'config.php';
+
+    const MIGRATIONS = __DIR__ . DS . 'db' . DS . 'migrations';
+
+    const SEEDS = __DIR__ . DS . 'db' . DS  . 'seeds';
 
     /**
      * BlogModule constructor.
@@ -24,8 +28,8 @@ class BlogModule extends Module
      */
     public function __construct(string $prefix, Router $router, RendererInterface $renderer)
     {
-        $renderer->addPath('blog', __DIR__ . DIRECTORY_SEPARATOR . 'views');
+        $renderer->addPath('blog', __DIR__ . DS . 'views');
         $router->get($prefix, Actions\BlogAction::class, 'blog.index');
-        $router->get($prefix . DIRECTORY_SEPARATOR . '{slug:[a-z\-0-9]+}', Actions\BlogAction::class, 'blog.show');
+        $router->get($prefix . DS . '{slug:[a-z\-0-9]+}', Actions\BlogAction::class, 'blog.show');
     }
 }

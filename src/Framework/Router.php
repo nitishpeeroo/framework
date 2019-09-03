@@ -7,7 +7,6 @@
     use Zend\Expressive\Router\FastRouteRouter;
     use Zend\Expressive\Router\Route as ZendRoute;
 
-
     /**
      * Class Router
      * @package Framework

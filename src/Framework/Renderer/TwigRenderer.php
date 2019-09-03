@@ -1,5 +1,6 @@
 <?php
     namespace Framework\Renderer;
+
     use Framework\Renderer\RendererInterface;
     use Twig\Environment;
     use Twig\Error\LoaderError;

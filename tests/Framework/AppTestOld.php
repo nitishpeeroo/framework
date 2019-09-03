@@ -10,7 +10,7 @@
     use Tests\Framework\Modules\ErroredModule;
     use Tests\Framework\Modules\StringModule;
 
-    class AppTest extends TestCase
+    class AppTestOld extends TestCase
     {
 
         public function testRedirectTrailingSlash()

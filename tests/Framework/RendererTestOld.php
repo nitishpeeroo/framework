@@ -2,9 +2,10 @@
     namespace Tests\Framework;
 
     use Framework\PHPRenderer;
+    use Framework\Renderer\TwigRenderer;
     use PHPUnit\Framework\TestCase;
 
-    class RendererTest extends TestCase {
+    class RendererTestOld extends TestCase {
 
         /**
          * @var PHPRenderer
@@ -13,7 +14,7 @@
 
         public function setUp()
         {
-            $this->renderer = new PHPRenderer();
+            $this->renderer = new TwigRenderer();
             $this->renderer->addPath( __DIR__.'/views');
         }
 

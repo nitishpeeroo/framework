@@ -1,5 +1,6 @@
 <?php
     namespace App\Blog\Actions;
+
     use Framework\Renderer\RendererInterface;
     use Psr\Http\Message\ServerRequestInterface as Request;
 
@@ -28,8 +29,6 @@ class BlogAction
     }
 
     /**
-     * @param Request $request
-     *
      * @return string
      */
     public function index() : string
@@ -38,7 +37,7 @@ class BlogAction
     }
 
     /**
-     * @param Request $request
+     * @param string $slug
      *
      * @return string
      */

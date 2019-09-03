@@ -8,9 +8,13 @@
     use function DI\get;
 
     return [
-        'views.path' => dirname(__DIR__) . DIRECTORY_SEPARATOR . 'views',
+        'database.host' => 'localhost',
+        'database.username' => 'root',
+        'database.password' => 'GrandTheftAuto93@',
+        'database.name' => 'sixtrone',
+        'views.path' => dirname(__DIR__) . DS . 'views',
         'twig.extensions' => [
-          get(RouterTwigExtension::class)  
+          get(RouterTwigExtension::class)
         ],
         RendererInterface::class => factory(TwigRendererFactory::class),
       RouterInterface::class => DI\create()

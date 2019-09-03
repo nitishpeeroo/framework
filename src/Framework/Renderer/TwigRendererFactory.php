@@ -1,7 +1,6 @@
 <?php
     namespace Framework\Renderer;
 
-    use Framework\Router\RouterTwigExtension;
     use Psr\Container\ContainerInterface;
     use Twig\Environment;
     use Twig\Loader\FilesystemLoader;

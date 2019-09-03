@@ -1,6 +1,7 @@
 <?php
 
     namespace Framework\Router;
+
     /**
      * Class Route
      * @package Framework\Router
