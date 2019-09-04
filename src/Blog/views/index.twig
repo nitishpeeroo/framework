@@ -4,11 +4,13 @@
 <h1>Bienvenue sur le blog</h1>
 
 <ul>
-    <li><a href="{{ path('blog.show', {slug: 'azeaze0-7-decdfv'}) }}">Article  test</a></li>
-    <li>Article 1</li>
-    <li>Article 1</li>
-    <li>Article 1</li>
-    <li>Article 1</li>
+    {% for post in posts %}
+    <li>
+        <a href="{{ path('blog.show', {slug: post.slug, id: post.id}) }}">
+            {{ post.name }}
+        </a>
+    </li>
+    {% endfor %}
 </ul>
 
 {%  endblock %}
