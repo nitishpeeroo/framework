@@ -4,17 +4,15 @@
     <div class="container">
         <h1>Bienvenue sur le blog</h1>
         {% for row in posts | batch(3) %}
-            <div class="row">
+            <div class="row ">
                 {% for post in row %}
                     <div class="col-sm-4">
-                        <div class="card">
+                        <div class="card mb-4">
                             <div class="card-header">
                              <h2>
                                  <a href="{{ path('blog.show', {slug: post.slug, id: post.id}) }}">
-                                     {{ post.name }}
+                                     {{ post.name | excerpt(20) }}
                                  </a>
-
-
                              </h2>
                             </div>
                             <div class="card-body">

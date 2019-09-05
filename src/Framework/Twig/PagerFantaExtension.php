@@ -34,11 +34,13 @@ class PagerFantaExtension extends AbstractExtension
     public function paginate(Pagerfanta $paginatedResults, string $route, array $queryArgs = []): string
     {
         $view = new TwitterBootstrap4View();
+        $option = ['prev_message' => '← Précédent',
+           'next_message' => 'Suivant →' ];
         return $view->render($paginatedResults, function (int $page) use ($route, $queryArgs) {
             if ($page > 1) {
                 $queryArgs['p'] = $page;
             }
             return $this->router->generateUri($route, [], $queryArgs);
-        });
+        }, $option);
     }
 }
