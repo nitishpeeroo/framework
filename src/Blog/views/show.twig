@@ -5,6 +5,8 @@
 
 <h1>{{ post.name }}</h1>
 
+    <p class="text-muted">Rédigé {{ post.created_at | timeago }}</p>
+
     {{ post.content | nl2br }}
 
 {%  endblock %}

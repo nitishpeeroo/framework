@@ -40,15 +40,19 @@ class BlogAction
         if ($request->getAttribute('id')) {
             return  $this->show($request);
         }
-        return  $this->index();
+        return  $this->index($request);
     }
 
     /**
+     * @param Request $request
+     *
      * @return string
      */
-    public function index() : string
+    public function index(Request $request) : string
     {
-        $posts = $this->postTable->findPaginated();
+        $params = $request->getQueryParams();
+        $p = (isset($params['p'])) ? (int)$params['p'] : 1;
+        $posts = $this->postTable->findPaginated(12, $p);
         return  $this->renderer->render('@blog/index', compact('posts'));
     }
 
@@ -68,6 +72,7 @@ class BlogAction
                 'id' => $post->id
             ]);
         }
+
         return  $this->renderer->render('@blog/show', [
             'post' => $post
         ]);
