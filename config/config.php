@@ -16,7 +16,7 @@
         'database.username' => 'root',
         'database.password' => 'GrandTheftAuto93@',
         'database.name' => 'sixtrone',
-        'views.path' => dirname(__DIR__) . DS . 'views',
+        'views.path' => dirname(__DIR__) . '/views',
         'twig.extensions' => [
           get(RouterTwigExtension::class),
             get(PagerFantaExtension::class),

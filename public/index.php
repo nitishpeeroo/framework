@@ -1,5 +1,6 @@
 <?php
 
+    use App\Admin\AdminModule;
     use App\Blog\BlogModule;
     use DI\ContainerBuilder;
     use Framework\App;
@@ -8,28 +9,26 @@
     use Whoops\Run;
     use function Http\Response\send;
 
-if (!defined(DS)) {
-    define(DS, DIRECTORY_SEPARATOR);
-}
-    require dirname(__DIR__) . DS . 'vendor' . DS . 'autoload.php';
+    require dirname(__DIR__) . '/vendor/autoload.php';
 
     $whoops = new Run();
     $whoops->prependHandler(new PrettyPageHandler());
     $whoops->register();
 
     $modules  = [
+        AdminModule::class,
         BlogModule::class
     ];
 
     $builder = new ContainerBuilder();
-    $builder->addDefinitions(dirname(__DIR__) . DS . 'config' . DS . 'config.php');
+    $builder->addDefinitions(dirname(__DIR__) . '/config/config.php');
 
     foreach ($modules as $module) {
         if ($module::DEFINITIONS) {
             $builder->addDefinitions($module::DEFINITIONS);
         }
     }
-    $builder->addDefinitions(dirname(__DIR__) . DS . 'config.php');
+    $builder->addDefinitions(dirname(__DIR__) . '/config.php');
 
     $container =  $builder->build();
 
