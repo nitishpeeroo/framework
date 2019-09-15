@@ -5,6 +5,8 @@
     use Framework\Actions\RouterAwareAction;
     use Framework\Renderer\RendererInterface;
     use Framework\Router;
+    use Framework\Session\FlashService;
+    use Framework\Session\SessionInterface;
     use Psr\Http\Message\ResponseInterface;
     use Psr\Http\Message\ServerRequestInterface as Request;
 
@@ -24,15 +26,21 @@ class AdminBlogAction
      * @var PostTable
      */
     private $postTable;
+    /**
+     * @var FlashService
+     */
+    private $flashService;
+
 
     use RouterAwareAction;
 
 
-    public function __construct(RendererInterface $renderer, Router $router, PostTable $postTable)
+    public function __construct(RendererInterface $renderer, Router $router, PostTable $postTable, FlashService $flashService)
     {
         $this->renderer = $renderer;
         $this->postTable = $postTable;
         $this->router = $router;
+        $this->flashService = $flashService;
     }
 
     public function __invoke(Request $request)
@@ -59,6 +67,7 @@ class AdminBlogAction
                 'updated_at' => date('Y-m-d H:i:s'),
             ]);
             $this->postTable->insert($params);
+            $this->flashService->success('L\'article à bien été crée');
             return  $this->redirect('blog.admin.index');
         }
 
@@ -75,6 +84,7 @@ class AdminBlogAction
         $params = $request->getQueryParams();
         $p = (isset($params['p'])) ? (int)$params['p'] : 1;
         $items = $this->postTable->findPaginated(12, $p);
+
         return  $this->renderer->render('@blog/admin/index', compact('items'));
     }
 
@@ -91,6 +101,7 @@ class AdminBlogAction
             $params = $this->getParams($request);
             $params['updated_at'] = date('Y-m-d H:i:s');
             $this->postTable->update($item->id, $params);
+            $this->flashService->success('L\'article à bien été modifié');
             return  $this->redirect('blog.admin.index');
         }
 

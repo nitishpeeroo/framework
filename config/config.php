@@ -3,26 +3,32 @@
     use Framework\Renderer\RendererInterface;
     use Framework\Renderer\TwigRendererFactory;
     use Framework\Router\RouterTwigExtension;
-    use Framework\Twig\PagerFantaExtension;
+use Framework\Session\PHPSession;
+use Framework\Session\SessionInterface;
+use Framework\Twig\FlashExtension;
+use Framework\Twig\PagerFantaExtension;
     use Framework\Twig\TextExtension;
     use Framework\Twig\TimeExtension;
     use Psr\Container\ContainerInterface;
     use Zend\Expressive\Router\RouterInterface;
-    use function DI\factory;
+use function DI\create;
+use function DI\factory;
     use function DI\get;
 
     return [
         'database.host' => 'localhost',
         'database.username' => 'root',
-        'database.password' => 'GrandTheftAuto93@',
+        'database.password' => 'ariane',
         'database.name' => 'sixtrone',
         'views.path' => dirname(__DIR__) . '/views',
         'twig.extensions' => [
           get(RouterTwigExtension::class),
             get(PagerFantaExtension::class),
             get(TextExtension::class),
-            get(TimeExtension::class)
+            get(TimeExtension::class),
+            get(FlashExtension::class)
         ],
+        SessionInterface::class => create(PHPSession::class),
         RendererInterface::class => factory(TwigRendererFactory::class),
       RouterInterface::class => DI\create(),
         \PDO::class => function(ContainerInterface $c){
