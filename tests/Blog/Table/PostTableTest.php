@@ -14,6 +14,7 @@
 
         public function setUp()
         {
+
             parent::setUp();
             $this->postTable = new PostTable($this->pdo);
         }
